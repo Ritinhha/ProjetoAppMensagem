@@ -2,12 +2,20 @@ from modelos.usuario import Usuario, NUsuario
 from modelos.grupo import Grupo, NGrupo
 from modelos.membro import Membro, NMembro
 from modelos.contato import Contato, NContato
+import streamlit as st
 
 class Servico:
     def Logar(nome, senha):
         for u in Servico.ListarUsuarios():
             if u.GetEmail() == nome and u.GetSenha() == senha:
+                st.session_state["user_id"] = u.GetId()
+                st.session_state["user_nome"] = u.GetNome()
                 return u
+        return None
+
+    def Deslogar():
+        del st.session_state["user_id"]
+        del st.session_state["user_nome"]
         return None
 
     def ListarUsuarios():
@@ -69,7 +77,6 @@ class Servico:
         for m in NMembro.Listar():
             if m.GetIdUsuario() == idUser:
                 g = NGrupo.AcharPorId(m.GetIdGrupo())
-                print(m.GetIdUsuario())
                 Grupos.append(g) 
         return Grupos
     def ListarGruposQueCriei(idUser):
@@ -90,6 +97,7 @@ class Servico:
             if m.GetIdUsuario() == memb.GetIdUsuario() and m.GetIdGrupo() == memb.GetIdGrupo():
                 return NMembro.Excluir(memb)
         else: return None
+
     def ListarMembrosDoGrupo(idGrp, idUser):
         Membros = []
         g = NGrupo.AcharPorId(idGrp)

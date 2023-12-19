@@ -13,10 +13,9 @@ class VisitanteUI:
             if user is not None:
                 st.success("Login realizado com sucesso")
                 st.success("Bem-vindo(a), " + user.GetNome())
-                st.session_state["user_id"] = user.GetId()
-                st.session_state["user_nome"] = user.GetNome()
+                
             else:
-                st.error("Emaiç ou senha inválido(s)")
+                st.error("Email ou senha inválido(s)")
             time.sleep(2)
             st.rerun()      
         

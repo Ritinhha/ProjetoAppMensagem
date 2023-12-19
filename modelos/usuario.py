@@ -26,7 +26,7 @@ class Usuario:
         self.__senha = s
 
     def __str__(self):
-        return f"{self.__nome} | {self.__email} | {self.__senha}"
+        return f"{self.__nome} | {self.__email}"
 
     def ToJson(self):
         return {

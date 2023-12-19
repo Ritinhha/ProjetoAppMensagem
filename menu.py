@@ -1,6 +1,7 @@
 import streamlit as st
 from interfaces.visitanteUI import VisitanteUI
 from interfaces.usuarioUI import UsuarioUI
+from servico import Servico
 
 class Menu:
     def MenuVisitante():
@@ -21,8 +22,7 @@ class Menu:
 
     def Deslogar():
         if st.sidebar.button("Deslogar"):
-            del st.session_state["user_id"]
-            del st.session_state["user_nome"]
+            Servico.Deslogar()
             st.rerun()
 
     def BarraLateral():
